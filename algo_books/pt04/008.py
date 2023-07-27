@@ -14,7 +14,10 @@ class Solution:
             _graph[u].append((v, w))
 
         Q = [(0, src, k + 1)]
-        dist = [[math.inf] * (k + 2) for _ in range(n)]
+
+        # k + 1에 대하여
+        #   최대 이동거리만큼 만들어 놓기 때문에 더 만들어봐야 의미 X (예외처리 때문에 + 2)
+        dist = [[math.inf] * (k + 1) for _ in range(n)]
 
         while Q:
             d, u, stops = heapq.heappop(Q)
