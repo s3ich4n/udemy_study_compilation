@@ -1,3 +1,5 @@
+import collections
+
 from typing import Optional
 
 
@@ -7,57 +9,49 @@ class TreeNode:
         self.left = left
         self.right = right
 
-
-# class Solution:
-#     def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-#         def __init__(self):
-#             self.diameter = 0
-
-#         def dfs(leaf: Optional[TreeNode], depth: int):
-#             if leaf.left:
-#                 dfs(leaf.left, depth + 1)
-#                 dfs(leaf.right, depth + 1)
-
-#             if leaf.right:
-#                 dfs(leaf.left, depth + 1)
-#                 dfs(leaf.right, depth + 1)
-
-#             return depth
-
-#         return dfs(root, depth=0)
+    def __repr__(self) -> str:
+        return f"[{self.val}]"
 
 
 class Solution:
-    def diameterOfBinaryTree(self, root: Optional[TreeNode]) -> int:
-        def __init__(self):
-            self.longest = 0
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        def bfs():
+            depth = 0
+            queue = collections.deque([root])
 
-        def dfs(node: Optional[TreeNode]):
-            if not node:
-                return -1
+            while queue:
+                for idx in range(len(queue)):
+                    v = queue.popleft()
 
-            left = dfs(node.left)
-            right = dfs(node.right)
+                    if v.left is not None:
+                        queue.append(v.left)
 
-            self.longest = max(self.longest, left + right + 2)  # 양쪽 상태값의 합에 + 2
-            return max(left, right) + 1
+                    if v.right is not None:
+                        queue.append(v.right)
 
-        dfs(root)
-        return self.longest
+                depth += 1
+
+            return depth
+
+        return bfs()
 
 
-# root = TreeNode(4)
+# root = TreeNode(1)
 # root.left = TreeNode(2)
-# root.right = None
-# root.left.left = TreeNode(3)
-# root.left.right = TreeNode(1)
-# root.left.right.left = TreeNode(5)
+# root.right = TreeNode(3)
+# root.left.left = TreeNode(4)
+# root.left.right = TreeNode(5)
+
+# root = TreeNode(1)
+# root.right = TreeNode(2)
+
 
 root = TreeNode(1)
 root.left = TreeNode(2)
-root.right = TreeNode(3)
 root.left.left = TreeNode(4)
-root.left.right = TreeNode(5)
+root.right = TreeNode(3)
+root.right.right = TreeNode(5)
 
 s = Solution()
-print(s.diameterOfBinaryTree(root))
+
+print(s.maxDepth(root))
