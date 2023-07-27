@@ -31,7 +31,7 @@
 
 - [online algorithms](https://en.wikipedia.org/wiki/Online_algorithm)은 입력값을 전체 입력을 받을 수 없는 상황에서 순서대로 처리하는 방식이다.
 - 다시말해, 전체 입력값이 무엇인지 모름을 의미한다.
-  - 예시) 데이터 다운로드를 유지해야되고, k번째 순서를 알고싶은 경우
+  - 예시: 데이터 다운로드를 유지해야되고, k번째 순서를 알고싶은 경우
 - 미리 값을 알고있지도 않다.
 - 가능성을 두고 이게 그거인갑다 하는 "근거있는 추측"은 할 수 있다.
 - 이를 [secretary problem](https://en.wikipedia.org/wiki/Secretary_problem)이라 부른다.
