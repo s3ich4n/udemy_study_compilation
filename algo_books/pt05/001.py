@@ -1,30 +1,48 @@
-from typing import List
+from typing import Optional, List
+
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+    def __repr__(self) -> str:
+        return f"[id: {id(self)}] {self.val} -> {self.next}"
 
 
 class Solution:
-    def majority_element(self, nums: List[int]) -> int:
-        if not nums:
-            return None
-        if len(nums) == 1:
-            return nums[0]
-        
-        half = len(nums) // 2
-        a = self.majority_element(nums[:half])
-        b = self.majority_element(nums[half:])
+    def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if l1 and l2:
+            if l1.val > l2.val:
+                l1, l2 = l2, l1
+            l1.next = self.mergeTwoLists(l1.next, l2)
 
-        # 좌/우를 가리는걸 이런식으로 한다!
-        # [b, a]는 걍 리스트고
-        # [nums.count(a) > half] 값은 True, False를 리턴한다.
-        return [b, a][nums.count(a) > half]
+        return l1 or l2
+
+    def sortList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not (head and head.next):
+            return head
+
+        half, slow, fast = None, head, head
+        while fast and fast.next:
+            half, slow, fast = slow, slow.next, fast.next.next
+        half.next = None
+
+        l1 = self.sortList(head)
+        l2 = self.sortList(slow)
+
+        return self.mergeTwoLists(l1, l2)
 
 
-if __name__ == "__main__":
-    q = Solution()
+root = ListNode(-1)
+root.next = ListNode(5)
+root.next.next = ListNode(3)
+root.next.next.next = ListNode(4)
+root.next.next.next.next = ListNode(0)
 
-    test1 = [3, 2, 3]
-    test2 = [2, 2, 1, 1, 1, 2, 2]
-    test3 = [1, 2, 1, 3, 1, 4, 1, 1]
+s = Solution()
 
-    print(q.majority_element(test1))
-    print(q.majority_element(test2))
-    print(q.majority_element(test3))
+s.sortList(root)
+
+a = 1
