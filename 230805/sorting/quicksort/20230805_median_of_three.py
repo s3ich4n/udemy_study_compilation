@@ -39,17 +39,29 @@ def partition(
 ) -> int:
     """
     획득한 pivot을 가지고, lo, hi가 교차되는 지점까지 swap한다
+
+    피벗값을 기준으로 좌측에는 작은 값을, 우측에는 큰 값으로 분할한다.
     """
     pivot_value = nums[pivot]
+    # 피벗값 좌측에 작은 값을 두는 연산을 편하게 하기 위해 스왑한다.
     nums[pivot], nums[hi] = nums[hi], nums[pivot]
+
+    # lo 값을 중심으로, 그 보다 작은 값을 왼편에
+    # 그 보다 큰 값을 오른편에 두기 위해 stored_index 를 별도로 저장
     stored_index = lo
 
     for idx in range(lo, hi):
+        # 피벗값보다 작으면... 현재 인덱스의 값과 stored_index 위치의 값을 스왑
         if nums[idx] < pivot_value:
             nums[idx], nums[stored_index] = nums[stored_index], nums[idx]
+            # stored_index 를 +1 하면서,
+            # 작은 값들의 연산 결과에 대한 마지막 인덱스를 기록한다
             stored_index += 1
 
+    # 피벗을 다시 원위치 시켜, 현재 피벗보다 작은값/큰값이 분리되게 완성함
     nums[stored_index], nums[hi] = nums[hi], nums[stored_index]
+
+    # 해당 연산을 마친 인덱스값을 전달
     return stored_index
 
 
@@ -62,6 +74,11 @@ def quicksort(nums: List[int], lo: int, hi: int):
 
         new_pivot_index = partition(nums, lo, hi, pivot)
 
+        # partition을 통해 "분할지점"을 찾았으니,
+        # 이를 통해 분할 후 `partition()` 을 또 수행하여
+        # "분할" 및 "정복"을 수행한다.
+        # "결합"은 "분할"을 하는 과정에서 이미 이루어지므로
+        # 여기서는 아무 것도 하지 않는다.
         quicksort(nums, lo, new_pivot_index - 1)
         quicksort(nums, new_pivot_index + 1, hi)
 
