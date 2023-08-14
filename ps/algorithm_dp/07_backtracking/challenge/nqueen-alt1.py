@@ -19,20 +19,23 @@ class Solution:
         self.tile = [["." for _ in range(0, n)] for _ in range(0, n)]
 
     @staticmethod
-    def discriminate(tile, x, y) -> bool:
-        print(f"{x}, {y} 판별 시작.")
-        print_current_tile(tile)
+    def discriminate(result, tile, x, y) -> bool:
+        if x == len(tile):
+            return False
+
+        # print(f"{x}, {y} 판별 시작.")
+        # print_current_tile(tile)
         triggered = False
 
         # x 좌표가 겹치는가? (0, 0), (1, 0), (2, 0), ... (n, 0)
-        x_size = (x for x in range(len(tile)))
+        x_size = (x for x in range(x))
         for _x in x_size:
             if tile[_x][y] == "Q":
                 triggered = True
                 break
 
         # y 좌표가 겹치는가? (0, 0), (0, 1), (0, 2), ... (0, n)
-        y_size = (y for y in range(len(tile)))
+        y_size = (y for y in range(y))
         for _y in y_size:
             if tile[x][_y] == "Q":
                 triggered = True
@@ -62,27 +65,8 @@ class Solution:
             return False
         else:
             tile[x][y] = "Q"
-            print_current_tile(tile)
+            # print_current_tile(tile)
             return True
-
-    def dfs(self, _times: int, n: int, _x: int, _y: int):
-        if _x >= n or _y >= n:
-            return
-        else:
-            if self.discriminate(self.tile, _x, _y):
-                if _times == 0:
-                    self.result.append(copy.deepcopy(self.tile))
-                    self.tile[_x][_y] = "."
-                    return
-                else:
-                    self.dfs(_times - 1, n, _x + 1, 0)
-                    print(f"tile[{_x}][{_y}] 원상복구.")
-                    self.tile[_x][_y] = "."
-                    return
-            else:
-                self.dfs(_times, n, _x, _y + 1)
-                print(f"tile[{_x}][{_y}] 원상복구.")
-                self.tile[_x][_y] = "."
 
     def refine_result(self):
         answer = []
@@ -96,10 +80,16 @@ class Solution:
 
         return answer
 
+    def dfs(self, _times: int, n: int, _x: int):
+        for col in range(n):
+            if self.discriminate(self.result, self.tile, _x, col):
+                self.dfs(_times, n, _x + 1)
+                if _x == n - 1:
+                    self.result.append(copy.deepcopy(self.tile))
+                self.tile[_x][col] = "."
+
     def solveNQueens(self, n: int) -> List[List[str]]:
-        for idx in range(n):
-            self.dfs(n - 1, n, 0, idx)
-            self.tile[0][idx] = "."
+        self.dfs(n - 1, n, 0)
 
         answer = self.refine_result()
 
