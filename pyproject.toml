@@ -7,8 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-black = "^23.7.0"
-flake8 = "^6.0.0"
 ipython = "^8.14.0"
 
 
