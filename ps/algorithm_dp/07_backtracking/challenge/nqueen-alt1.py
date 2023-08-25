@@ -99,7 +99,7 @@ class Solution:
         print("--결과--")
 
         for idx, tiles in enumerate(self.result):
-            print(f"{idx}회차")
+            print(f"{idx + 1}회차")
             for tile_x in tiles:
                 for tile_y in tile_x:
                     print(f"{tile_y} ", end="")
