@@ -72,7 +72,6 @@ def get_pattern_from_str(haystack, needle) -> Union[str, None]:
         # 불일치가 일어나면?
         # 경계만큼 움직인다
         else:
-            # idx += border[right-idx]
             idx += (len(haystack[idx:idx + right - 1]) - border[right - 1])
             right = 1
             left = 1
