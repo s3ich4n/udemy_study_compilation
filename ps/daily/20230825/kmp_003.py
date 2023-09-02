@@ -7,7 +7,15 @@
 from typing import List
 
 
-def preprocess_kmp(pattern: str):
+def preprocess_kmp(pattern: str) -> List[int]:
+    """ 상기 정리, 증명, 정의를 활용하여, KMP에 사용할 문자열을 생성한다.
+
+    Args:
+        pattern (str): 문자열 패턴
+
+    Returns:
+        List[int]: KMP 탐색에 사용할 패턴의 스킵값
+    """
     i = 0
     j = -1
     b = [-1 for _ in range(len(pattern) + 1)]
@@ -29,13 +37,17 @@ def find_pattern(b: List, text: str, pattern: str) -> int:
     result = []
     i = j = 0
 
+    # 전체 문자열을 순회한다
     while i < len_text:
+
+        # pattern과 다르면 점프한다
         while j >= 0 and text[i] != pattern[j]:
             j = b[j]
 
         i += 1
         j += 1
 
+        # 이거까지만 비교하면, 패턴을 찾을 수 있다.
         if j == len_pat:
             result.append(i - j)
             j = b[j]
@@ -54,7 +66,8 @@ def find_pattern(b: List, text: str, pattern: str) -> int:
 # text = "aaa"
 # text = "mississippi"
 # text = "BAABAABAB"
-text = "babbbbbabb"
+# text = "babbbbbabb"
+text = "bbabbb aaabababaa"
 
 # pattern = "Jump".lower()
 # pattern = "BAABABAA"
@@ -63,7 +76,7 @@ text = "babbbbbabb"
 # pattern = "a"
 # pattern = "issip"
 # pattern = "BAABAB"
-pattern = "bbab"
+pattern = "ababaa"
 
 
 b = preprocess_kmp(pattern)
