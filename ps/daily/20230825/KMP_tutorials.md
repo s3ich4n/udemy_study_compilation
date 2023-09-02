@@ -41,6 +41,55 @@ pat = `"ABXAB"` 일 때, prefix, suffix를 구하며 LPS를 구해보자.
 |3|ABXA|1|prefix, suffix가 일치하는 값은 "A", 길이는 1<br />(아! 이 안에서도 위의 prefix, suffix 연산을 하고 그 결과를 처리하는거구나!)|
 |4|ABXAB|2|prefix, suffix가 일치하는 값은 "AB", 길이는 2<br />|
 
+abacab ?
+
+공백포함
+
+```
+a            b
+ab          ab
+aba        cab
+abac      acab
+abaca    bacab
+```
+
+여기의 경계는 `ab`
+
+공백은 항상 경계다.
+
+---
+E.g., 
+t = `abcabcabd`
+p = `abcabd`
+
+인 경우
+
+0~4는 매치고 5는 매치안됨 - 이 때는 3칸 갈 수 있음
+p를 만족하는 가장 긴 접두사의 경계를 선택.
+abcab (`ab`) 를 선택하고 `j - b` = `5-2` = `3` 이 답임
+
+
+abcabd의 경계는? - 불일치함
+
+```
+a           d
+ab         bd
+abc       abd
+abca     cabd
+abcab   bcabd
+```
+
+그러면
+
+abcab - 경계는 ab
+
+```
+a       b
+ab     ab
+abc   cab
+abca bcab
+```
+
 ## LPS 구하기 - 코드
 
 코드를 살펴봅시다.
