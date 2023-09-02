@@ -97,8 +97,14 @@
 1. 경계정보 검색하기
 2. 문자열에서 패턴만큼 읽기
 
-### 추후 접근시?
+## 보다 나은 접근법
 
-코드 자체는 그다지 어렵지않았지만 경계조건 및 코드 간결화가 가능한지 다시 살펴보자.
+해당 [링크](https://hwlang.de/algorithmen/pattern/kmpen.htm) 를 보고 학습하자!
 
-구현코드 -> kmp_002.py
+### 상세
+
+구현코드 -> kmp_003.py
+
+![경계 r, x의 문자열 s](https://hwlang.de/algorithmen/pattern/rand.gif)
+
+`r`과 `s` 라는 문자열은 `x`의 경계값이라고 하자. `|r| < |s|` 일 때, `r`은 `s`의 경계다.
