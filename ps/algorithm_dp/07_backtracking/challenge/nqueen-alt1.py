@@ -84,8 +84,13 @@ class Solution:
         for col in range(n):
             if self.discriminate(self.result, self.tile, _x, col):
                 self.dfs(_times, n, _x + 1)
+
+                # 여기까지 왔으면 맞는거고
                 if _x == n - 1:
                     self.result.append(copy.deepcopy(self.tile))
+
+                # 여기 오면 길을 포기한다.
+                # 이게 백트래킹 핵심! 필요없는걸 싹다 버림.
                 self.tile[_x][col] = "."
 
     def solveNQueens(self, n: int) -> List[List[str]]:

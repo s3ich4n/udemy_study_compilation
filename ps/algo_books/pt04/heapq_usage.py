@@ -36,7 +36,9 @@ def is_valid(lines, position):
     x, y = position
     if not (0 <= y < len(lines) and 0 <= x < len(lines[y])):
         return False
-    if lines[y][x] == "X":  # y값이 먼저 커지고(inner for loop), x값은 나중에 커진다(outer for loop). 즉, get_neighbors에서 계산하는 식으로 좌표값 내 값을 비교하려면, 이렇게 비교한다.
+    # y값이 먼저 커지고(inner for loop), x값은 나중에 커진다(outer for loop).
+    # 즉, get_neighbors에서 계산하는 식으로 좌표값 내 값을 비교하려면, 이렇게 비교한다.
+    if lines[y][x] == "X":
         return False
     return True
 

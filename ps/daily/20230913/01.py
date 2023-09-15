@@ -27,7 +27,7 @@ class Solution:
 
 
 s = Solution()
-print(s.candy(ratings=[1,0,2]))     # 5
-print(s.candy(ratings=[1,2,2]))     # 4
+# print(s.candy(ratings=[1,0,2]))     # 5
+# print(s.candy(ratings=[1,2,2]))     # 4
 print(s.candy(ratings=[1,3,2,2,1]))     # 7
 print(s.candy(ratings=[1,2,87,87,87,2,1]))     # 13
