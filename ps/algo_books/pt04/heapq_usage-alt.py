@@ -7,20 +7,11 @@
 
 import heapq
 
-
 map = """\
-.......X..
-.......X..
-....XXXX..
-..........
-..........
-"""
-
-map = """\
-.X...
-.X.X.
-.X.X.
 ...X.
+.XXX.
+.XXX.
+.....
 """
 
 #
@@ -59,7 +50,7 @@ def get_neighbors(lines, current):
     x, y = current
     for dx in [-1, 0, 1]:
         for dy in [-1, 0, 1]:
-            if (dx == 0 and dy == 0):
+            if (dx == 0 and dy == 0) or (abs(dx) + abs(dy) == 2):
                 continue
             position = x + dx, y + dy
             if is_valid(lines, position):
