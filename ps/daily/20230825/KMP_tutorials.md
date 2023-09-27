@@ -84,10 +84,10 @@ abcab   bcabd
 abcab - 경계는 ab
 
 ```
-a       b
-ab     ab
-abc   cab
-abca bcab
+a         b
+ab       ab
+abc     cab
+abca   bcab
 ```
 
 ## LPS 구하기 - 코드
